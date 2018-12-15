@@ -2,15 +2,15 @@
   <div id="app">
     <section class="section">
       <h2 class="section__title">Push</h2>
-      <div class="line-separator"></div>
+      <div class="section__line-separator"></div>
     </section>
     <section class="section">
       <h2 class="section__title">Pull</h2>
-      <div class="line-separator"></div>
+      <div class="section__line-separator"></div>
     </section>
     <section class="section">
       <h2 class="section__title">Legs</h2>
-      <div class="line-separator"></div>
+      <div class="section__line-separator"></div>
     </section>
   </div>
 </template>
@@ -26,7 +26,13 @@ export default {
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Montserrat:600,800&subset=latin-ext");
 
-html {
+:root {
+  --gutter: 20px;
+  --color-primary: #fff;
+}
+
+html,
+body {
   height: 100%;
 }
 
@@ -41,10 +47,11 @@ body {
   height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #fff;
+  color: var(--color-primary);
   background-image: url("assets/gym-bg.png");
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
   font-family: "Montserrat", Arial, sans-serif;
   font-weight: 800;
   font-size: 14px;
@@ -52,5 +59,26 @@ body {
 
 .section {
   flex: 1 1 34%;
+
+  &__title {
+    padding-left: var(--gutter);
+    font-size: 36px;
+    padding-top: 21vh;
+    padding-bottom: 16px;
+    margin: 0;
+    // transform: translateY(16vh);
+  }
+
+  &__line-separator {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-primary);
+  }
+
+  &:last-child {
+    .section__line-separator {
+      display: none;
+    }
+  }
 }
 </style>

@@ -23,7 +23,6 @@ export default {
     handleClick: function(e) {
       this.$refs.app.classList.add("app--open");
       this.$refs.section.classList.remove("section--active");
-      console.log(this.$refs.section.classList);
       e.target.classList.add("section--active");
     }
   }

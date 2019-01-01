@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div :class="['home', { open: accordionIsOpen }]">
     <section class="section" ref="section" @click="handleClick">
       <h2 class="section__title">Push</h2>
     </section>
@@ -16,11 +16,18 @@
 export default {
   name: "Home",
   components: {},
+  data: function() {
+    return {
+      accordionIsOpen: false
+    };
+  },
   methods: {
-    handleClick: function() {
-      // this.$refs.app.classList.add("app--open");
-      // this.$refs.section.classList.remove("section--active");
-      // e.target.classList.add("section--active");
+    handleClick: function(e) {
+      this.accordionIsOpen = true;
+      // Oldschool method
+      let elements = document.querySelectorAll("section");
+      elements.forEach(elem => elem.classList.remove("section--active"));
+      e.currentTarget.classList.add("section--active");
     }
   }
 };
@@ -55,32 +62,43 @@ export default {
     opacity: 0.8;
   }
 
-  &--open {
+  &.open {
     .section {
       flex: 0 1 7%;
+
+      &--active {
+        flex: 1 1 70%;
+
+        .section__title {
+          font-size: 36px;
+        }
+      }
+
+      &__title {
+        transform: translateY(0);
+        font-size: 24px;
+      }
     }
   }
-}
 
-.section {
-  position: relative;
-  flex: 0 1 34%;
-  transition: all 0.3s ease-in;
-  border-bottom: 2px solid var(--color-primary);
+  .section {
+    position: relative;
+    flex: 0 1 34%;
+    transition: all 0.3s ease-in;
+    border-bottom: 2px solid var(--color-primary);
 
-  &:last-child {
-    border-bottom: none;
-  }
+    &:last-child {
+      border-bottom: none;
+    }
 
-  &--active {
-    flex: 1 1 70%;
-  }
-
-  &__title {
-    padding-left: var(--gutter);
-    font-size: 36px;
-    margin: 0;
-    transform: translateY(23vh);
+    &__title {
+      padding-left: var(--gutter);
+      font-size: 36px;
+      margin: 0;
+      transform: translateY(23vh);
+      transition: flex 0.5s cubic-bezier(0.61, -0.19, 0.7, -0.11),
+        transform 0.3s ease-in, font-size 0.3s ease-in;
+    }
   }
 }
 </style>

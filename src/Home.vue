@@ -2,6 +2,18 @@
   <div :class="['home', { open: accordionIsOpen }]">
     <section class="section" @click="handleClick">
       <h2 class="section__title">Push</h2>
+      <div class="section__content">
+        <ul>
+          <Exercise
+            v-for="exercise in exercises"
+            v-show="exercise.type  === 'Push'"
+            :key="exercise.name"
+            :name="exercise.name"
+            :quantity="exercise.quantity"
+            :type="exercise.type"
+          />
+        </ul>
+      </div>
     </section>
     <section class="section" @click="handleClick">
       <h2 class="section__title">Pull</h2>
@@ -9,15 +21,29 @@
         <ul>
           <Exercise
             v-for="exercise in exercises"
+            v-show="exercise.type  === 'Pull'"
             :key="exercise.name"
             :name="exercise.name"
             :quantity="exercise.quantity"
+            :type="exercise.type"
           />
         </ul>
       </div>
     </section>
     <section class="section" @click="handleClick">
       <h2 class="section__title">Legs</h2>
+      <div class="section__content">
+        <ul>
+          <Exercise
+            v-for="exercise in exercises"
+            v-show="exercise.type  === 'Legs'"
+            :key="exercise.name"
+            :name="exercise.name"
+            :quantity="exercise.quantity"
+            :type="exercise.type"
+          />
+        </ul>
+      </div>
     </section>
   </div>
 </template>
@@ -32,6 +58,36 @@ export default {
     return {
       accordionIsOpen: false,
       exercises: [
+        {
+          type: "Push",
+          name: "Wyciskanie sztangi leżąc na ławce",
+          quantity: "3x10"
+        },
+        {
+          type: "Push",
+          name: "Wyciskanie hantli skos",
+          quantity: "3x10"
+        },
+        {
+          type: "Push",
+          name: "Rozpiętki skos",
+          quantity: "3x10"
+        },
+        {
+          type: "Push",
+          name: "Wyciskanie żołnierskie",
+          quantity: "3x8"
+        },
+        {
+          type: "Push",
+          name: "Wznosy bokiem hantli",
+          quantity: "3x12"
+        },
+        {
+          type: "Push",
+          name: "Francuz, hantle zza głowy",
+          quantity: "3x8"
+        },
         {
           type: "Pull",
           name: "Wiosłowanie sztangą w opadzie",
@@ -60,6 +116,31 @@ export default {
         {
           type: "Pull",
           name: "Uginanie przedramion ze sztangą",
+          quantity: "3x8"
+        },
+        {
+          type: "Legs",
+          name: "Przysiad ze sztangą",
+          quantity: "3x10"
+        },
+        {
+          type: "Legs",
+          name: "Martwy ciąg",
+          quantity: "3x8"
+        },
+        {
+          type: "Legs",
+          name: "Przysiad bułgarski",
+          quantity: "3x10"
+        },
+        {
+          type: "Legs",
+          name: "Uginanie nóg leżąc",
+          quantity: "3x10"
+        },
+        {
+          type: "Legs",
+          name: "Hip Trust",
           quantity: "3x8"
         }
       ]
@@ -116,6 +197,10 @@ export default {
         .section__title {
           font-size: 36px;
         }
+
+        .section__content {
+          display: block;
+        }
       }
 
       &__title {
@@ -128,6 +213,7 @@ export default {
   .section {
     position: relative;
     flex: 0 1 34%;
+    overflow: hidden;
     transition: all 0.3s ease-in;
     border-bottom: 2px solid var(--color-primary);
 
@@ -145,6 +231,7 @@ export default {
     }
 
     &__content {
+      display: none;
       padding: var(--gutter) / 2 0;
     }
   }

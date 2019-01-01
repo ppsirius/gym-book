@@ -12,7 +12,8 @@ export default {
   name: "Exercise",
   props: {
     name: String,
-    quantity: String
+    quantity: String,
+    type: String
   }
 };
 </script>
@@ -27,7 +28,6 @@ export default {
   &__name {
     padding-right: 10px;
     flex: 1 1 100%;
-    font-size: 14px;
     font-weight: 600;
     line-height: 1;
     white-space: nowrap;

@@ -2,15 +2,12 @@
   <div class="home">
     <section class="section" ref="section" @click="handleClick">
       <h2 class="section__title">Push</h2>
-      <div class="section__line-separator"></div>
     </section>
     <section class="section" ref="section" @click="handleClick">
       <h2 class="section__title">Pull</h2>
-      <div class="section__line-separator"></div>
     </section>
     <section class="section" ref="section" @click="handleClick">
       <h2 class="section__title">Legs</h2>
-      <div class="section__line-separator"></div>
     </section>
   </div>
 </template>
@@ -20,7 +17,7 @@ export default {
   name: "Home",
   components: {},
   methods: {
-    handleClick: function(e) {
+    handleClick: function() {
       // this.$refs.app.classList.add("app--open");
       // this.$refs.section.classList.remove("section--active");
       // e.target.classList.add("section--active");
@@ -31,6 +28,7 @@ export default {
 
 <style lang="scss">
 .home {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -45,6 +43,18 @@ export default {
   font-weight: 800;
   font-size: 14px;
 
+  &:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    background: linear-gradient(180deg, #0a2f57 0%, #0c5576 100%);
+    mix-blend-mode: multiply;
+    opacity: 0.8;
+  }
+
   &--open {
     .section {
       flex: 0 1 7%;
@@ -53,13 +63,13 @@ export default {
 }
 
 .section {
+  position: relative;
   flex: 0 1 34%;
   transition: all 0.3s ease-in;
+  border-bottom: 2px solid var(--color-primary);
 
   &:last-child {
-    .section__line-separator {
-      display: none;
-    }
+    border-bottom: none;
   }
 
   &--active {
@@ -69,16 +79,8 @@ export default {
   &__title {
     padding-left: var(--gutter);
     font-size: 36px;
-    // padding-top: 21vh;
-    padding-bottom: 16px;
     margin: 0;
-    // transform: translateY(16vh);
-  }
-
-  &__line-separator {
-    width: 100%;
-    height: 2px;
-    background-color: var(--color-primary);
+    transform: translateY(23vh);
   }
 }
 </style>

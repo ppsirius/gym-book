@@ -1,24 +1,68 @@
 <template>
   <div :class="['home', { open: accordionIsOpen }]">
-    <section class="section" ref="section" @click="handleClick">
+    <section class="section" @click="handleClick">
       <h2 class="section__title">Push</h2>
     </section>
-    <section class="section" ref="section" @click="handleClick">
+    <section class="section" @click="handleClick">
       <h2 class="section__title">Pull</h2>
+      <div class="section__content">
+        <ul>
+          <Exercise
+            v-for="exercise in exercises"
+            :key="exercise.name"
+            :name="exercise.name"
+            :quantity="exercise.quantity"
+          />
+        </ul>
+      </div>
     </section>
-    <section class="section" ref="section" @click="handleClick">
+    <section class="section" @click="handleClick">
       <h2 class="section__title">Legs</h2>
     </section>
   </div>
 </template>
 
 <script>
+import Exercise from "./components/Exercise";
+
 export default {
   name: "Home",
-  components: {},
+  components: { Exercise },
   data: function() {
     return {
-      accordionIsOpen: false
+      accordionIsOpen: false,
+      exercises: [
+        {
+          type: "Pull",
+          name: "Wiosłowanie sztangą w opadzie",
+          quantity: "3x8"
+        },
+        {
+          type: "Pull",
+          name: "Wiosłowanie hantlem w podporze",
+          quantity: "3x10"
+        },
+        {
+          type: "Pull",
+          name: "Podciąganie na drążku",
+          quantity: "3x8"
+        },
+        {
+          type: "Pull",
+          name: "Wznosy w opadzie tułowia / facepull",
+          quantity: "3x12"
+        },
+        {
+          type: "Pull",
+          name: "Wznosy bokiem na bramie",
+          quantity: "3x12"
+        },
+        {
+          type: "Pull",
+          name: "Uginanie przedramion ze sztangą",
+          quantity: "3x8"
+        }
+      ]
     };
   },
   methods: {
@@ -98,6 +142,10 @@ export default {
       transform: translateY(23vh);
       transition: flex 0.5s cubic-bezier(0.61, -0.19, 0.7, -0.11),
         transform 0.3s ease-in, font-size 0.3s ease-in;
+    }
+
+    &__content {
+      padding: var(--gutter) / 2 0;
     }
   }
 }

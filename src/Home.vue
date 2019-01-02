@@ -4,14 +4,16 @@
       <h2 class="section__title">Push</h2>
       <div class="section__content">
         <ul>
-          <Exercise
-            v-for="exercise in exercises"
-            v-show="exercise.type  === 'Push'"
-            :key="exercise.name"
-            :name="exercise.name"
-            :quantity="exercise.quantity"
-            :type="exercise.type"
-          />
+          <transition-group name="fade">
+            <Exercise
+              v-for="exercise in exercises"
+              v-show="exercise.type  === 'Push'"
+              :key="exercise.name"
+              :name="exercise.name"
+              :quantity="exercise.quantity"
+              :type="exercise.type"
+            />
+          </transition-group>
         </ul>
       </div>
     </section>
@@ -72,6 +74,24 @@ export default {
 </script>
 
 <style lang="scss">
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: all 2s;
+}
+
+.fade-leave {
+  // opacity: 1;
+}
+
+.fade-leave-active {
+  opacity: 0;
+  transition: all 2s;
+}
+
 .home {
   position: relative;
   display: flex;

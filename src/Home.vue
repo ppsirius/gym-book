@@ -1,6 +1,6 @@
 <template>
   <div :class="['home', { open: accordionIsOpen }]">
-    <section class="section" @click="handleClick">
+    <section :class="['section', {active: activeAccordion === 'Push'}]" id="Push" @click="handleClick">
       <h2 class="section__title">Push</h2>
       <div class="section__content">
         <ul>
@@ -15,7 +15,7 @@
         </ul>
       </div>
     </section>
-    <section class="section" @click="handleClick">
+    <section :class="['section', {active: activeAccordion === 'Pull'}]" id="Pull" @click="handleClick">
       <h2 class="section__title">Pull</h2>
       <div class="section__content">
         <ul>
@@ -30,7 +30,7 @@
         </ul>
       </div>
     </section>
-    <section class="section" @click="handleClick">
+    <section :class="['section', {active: activeAccordion === 'Legs'}]" id="Legs" @click="handleClick">
       <h2 class="section__title">Legs</h2>
       <div class="section__content">
         <ul>
@@ -58,16 +58,14 @@ export default {
   data: function() {
     return {
       accordionIsOpen: false,
+      activeAccordion: '',
       exercises: exercises
     };
   },
   methods: {
     handleClick: function(e) {
       this.accordionIsOpen = true;
-      // Oldschool method
-      let elements = document.querySelectorAll("section");
-      elements.forEach(elem => elem.classList.remove("section--active"));
-      e.currentTarget.classList.add("section--active");
+      this.activeAccordion = e.currentTarget.id
     }
   }
 };
@@ -106,7 +104,7 @@ export default {
     .section {
       flex: 0 1 7%;
 
-      &--active {
+      &.active {
         flex: 1 1 70%;
 
         .section__title {

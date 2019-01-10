@@ -3,8 +3,8 @@
     <section :class="['section', {active: activeAccordion === 'Push'}]" id="Push" @click="handleClick">
       <h2 class="section__title">Push</h2>
       <div class="section__content">
-        <ul>
-          <transition-group name="fade">
+        <transition name="fade">
+          <ul v-if="activeAccordion === 'Push'">
             <Exercise
               v-for="exercise in exercises"
               v-show="exercise.type  === 'Push'"
@@ -13,23 +13,25 @@
               :quantity="exercise.quantity"
               :type="exercise.type"
             />
-          </transition-group>
-        </ul>
+          </ul>
+        </transition>
       </div>
     </section>
     <section :class="['section', {active: activeAccordion === 'Pull'}]" id="Pull" @click="handleClick">
       <h2 class="section__title">Pull</h2>
       <div class="section__content">
-        <ul>
-          <Exercise
-            v-for="exercise in exercises"
-            v-show="exercise.type  === 'Pull'"
-            :key="exercise.name"
-            :name="exercise.name"
-            :quantity="exercise.quantity"
-            :type="exercise.type"
-          />
-        </ul>
+        <transition name="fade">
+          <ul v-if="activeAccordion === 'Pull'">
+            <Exercise
+              v-for="exercise in exercises"
+              v-show="exercise.type  === 'Pull'"
+              :key="exercise.name"
+              :name="exercise.name"
+              :quantity="exercise.quantity"
+              :type="exercise.type"
+            />
+          </ul>
+        </transition>
       </div>
     </section>
     <section :class="['section', {active: activeAccordion === 'Legs'}]" id="Legs" @click="handleClick">
@@ -67,30 +69,22 @@ export default {
   methods: {
     handleClick: function(e) {
       this.accordionIsOpen = true;
-      this.activeAccordion = e.currentTarget.id
+      this.activeAccordion = e.currentTarget.id;
     }
   }
 };
 </script>
 
 <style lang="scss">
-.fade-enter {
+
+.fade-enter-active, .fade-leave-active {
+  transition: all .3s ease-in;
+}
+.fade-enter, .fade-leave-to {
+  transform: translateY(-30px);
   opacity: 0;
 }
 
-.fade-enter-active {
-  opacity: 1;
-  transition: all 2s;
-}
-
-.fade-leave {
-  // opacity: 1;
-}
-
-.fade-leave-active {
-  opacity: 0;
-  transition: all 2s;
-}
 
 .home {
   position: relative;

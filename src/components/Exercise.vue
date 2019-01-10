@@ -29,7 +29,6 @@ export default {
     padding-right: 10px;
     flex: 1 1 100%;
     font-weight: 600;
-    line-height: 1;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -37,7 +36,6 @@ export default {
 
   .details__quantity {
     font-size: 18px;
-    line-height: 1;
   }
 }
 </style>
